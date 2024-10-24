@@ -2,7 +2,7 @@
 import axios from "axios";
 import { getToken, setToken, setUserDetails } from "../helper/sessionHelper";
 
-const BaseURL = "http://localhost:8000/api/v1";
+const BaseURL = "https://edu-backend-1.onrender.com/api/v1";
 const token = getToken();
 
 const config = {
