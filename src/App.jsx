@@ -38,6 +38,7 @@ import AdminInbox from "./admin/admininbox/AdminInbox";
 import Importantnoticeadmin from "./admin/importantnoticeadmin/Importantnoticeadmin.jsx";
 import StudentList from "./admin/studentList/StudentList.jsx";
 import StudentResultList from "./admin/resultList/StudentResultList.jsx";
+import { slideGetRequest } from "./APIRequest/APIRequest.js";
 
 function App() {
   const token = getToken();
@@ -52,6 +53,25 @@ function App() {
       redirect("/login");
     }
   }, [token]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      slideGetRequest()
+        .then()
+        .catch((err) => {
+          console.log(err.message);
+        });
+    };
+
+    // Fetch data immediately
+    fetchData();
+
+    // Poll every 5 seconds (5000 ms)
+    const interval = setInterval(fetchData, 5000);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <Router>
