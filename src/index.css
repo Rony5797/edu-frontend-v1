@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: "Noto Sans Bengali", sans-serif; /* Use Noto Sans Bengali for all elements */
+  font-weight: 400; /* Adjust font-weight as needed */
+}
+
+body {
+  font-family: "Noto Sans Bengali", sans-serif; /* Set Noto Sans Bengali for the body */
+}

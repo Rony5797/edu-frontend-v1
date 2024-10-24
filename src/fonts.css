@@ -1,0 +1,8 @@
+/* src/fonts.css */
+@font-face {
+  font-family: "CustomFont";
+  src: url("public/font/Humayra-Bornomala/ANSI V1/FL Humayra Bornomala ANSI V1.ttf")
+    format("truetype"); /* Adjust the path if needed */
+  font-weight: normal;
+  font-style: normal;
+}
