@@ -2,8 +2,9 @@
 import axios from "axios";
 import { getToken, setToken, setUserDetails } from "../helper/sessionHelper";
 
-const BaseURL = "https://edu-backend-1.onrender.com/api/v1";
+const BaseURL = "http://localhost:8000/api/v1";
 const token = getToken();
+
 const config = {
   headers: {
     Authorization: `Bearer ${token}`,
@@ -313,13 +314,17 @@ export async function deleteInbox(id) {
   }
 }
 export async function seenInbox(id) {
-  let URL = BaseURL + "/inbox/" + id;
+  let URL = BaseURL + "/inboxseen/" + id;
 
   try {
-    const res = await axios.patch(URL, config);
+    const res = await axios.get(URL, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return res.data;
   } catch (err) {
-    console.error("Error delete inbox:", err.message);
+    console.error("Error seen inbox:", err.message);
     throw err;
   }
 }

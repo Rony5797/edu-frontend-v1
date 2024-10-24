@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Layout from "../Layout";
-import { FaEye, FaEyeSlash } from "react-icons/fa"; // Ensure you have react-icons installed
+import { FaEye } from "react-icons/fa"; // Ensure you have react-icons installed
 import { allInbox, deleteInbox, seenInbox } from "../../APIRequest/APIRequest";
 import { formatTimeFromDateString } from "../../helper/timeConverter";
 import { Trash2 } from "lucide-react";
@@ -74,10 +74,8 @@ function AdminInbox() {
                   onClick={() => msg.seen === false && seenHandler(msg._id)}
                   className="mt-2 text-blue-500 hover:text-blue-700 focus:outline-none"
                 >
-                  {msg.seen === true ? (
+                  {!msg.seen && (
                     <FaEye className="inline-block" title="Marked as read" />
-                  ) : (
-                    <FaEyeSlash className="inline-block" title="Mark as read" />
                   )}
                 </button>
               </div>
