@@ -316,7 +316,7 @@ export async function seenInbox(id) {
   let URL = BaseURL + "/inbox/" + id;
 
   try {
-    const res = await axios.patch(URL);
+    const res = await axios.patch(URL, config);
     return res.data;
   } catch (err) {
     console.error("Error delete inbox:", err.message);
