@@ -19,7 +19,7 @@ const StudentList = () => {
   );
 
   const handleEdit = (id) => {
-    navigate("/admin-students/" + id);
+    navigate("/admin/admin-students/" + id);
   };
 
   const handleDelete = (id) => {
