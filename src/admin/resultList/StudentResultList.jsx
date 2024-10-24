@@ -22,7 +22,7 @@ const StudentResultList = () => {
   );
 
   const handleEdit = (id) => {
-    navigate("/admin-results/" + id);
+    navigate("/admin/admin-results/" + id);
   };
 
   const handleDelete = (id) => {
