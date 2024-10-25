@@ -60,13 +60,12 @@ function App() {
     const fetchData = async () => {
       setIsLoading(true);
 
-      const timeoutPromise = new Promise(
-        (_, reject) => setTimeout(() => reject(new Error("Timeout")), 5000) // 5 seconds
-      );
-
+      let timeoutPromise;
       const apiPromise = slideGetRequest().then((res) => {
         if (res.status === "success") {
-          // Optionally handle successful response here
+          timeoutPromise = new Promise(
+            (_, reject) => setTimeout(() => reject(new Error("Timeout")), 5000) // 5 seconds
+          );
         } else {
           throw new Error("Failed to fetch data");
         }
