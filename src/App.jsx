@@ -39,8 +39,10 @@ import Importantnoticeadmin from "./admin/importantnoticeadmin/Importantnoticead
 import StudentList from "./admin/studentList/StudentList.jsx";
 import StudentResultList from "./admin/resultList/StudentResultList.jsx";
 import { slideGetRequest } from "./APIRequest/APIRequest.js";
+import Loading from "./components/loader/Loading.jsx";
 
 function App() {
+  const [isLoading, setIsLoading] = useState(false);
   const token = getToken();
 
   useEffect(() => {
@@ -56,22 +58,39 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      slideGetRequest()
-        .then()
-        .catch((err) => {
-          console.log(err.message);
-        });
+      setIsLoading(true);
+
+      const timeoutPromise = new Promise(
+        (_, reject) => setTimeout(() => reject(new Error("Timeout")), 5000) // 5 seconds
+      );
+
+      const apiPromise = slideGetRequest().then((res) => {
+        if (res.status === "success") {
+          // Optionally handle successful response here
+        } else {
+          throw new Error("Failed to fetch data");
+        }
+      });
+
+      try {
+        await Promise.race([apiPromise, timeoutPromise]);
+      } catch (err) {
+        console.log(err.message);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
-    // Fetch data immediately
     fetchData();
-
-    // Poll every 5 seconds (5000 ms)
-    const interval = setInterval(fetchData, 5000);
-
-    // Cleanup interval on component unmount
-    return () => clearInterval(interval);
   }, []);
+
+  if (isLoading) {
+    return (
+      <div className="flex h-screen justify-center items-center">
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <Router>
@@ -118,4 +137,5 @@ function App() {
     </Router>
   );
 }
+
 export default App;
